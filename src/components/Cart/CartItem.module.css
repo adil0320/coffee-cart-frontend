@@ -1,0 +1,26 @@
+tr span {
+  margin: 0;
+  padding: 0;
+}
+
+.btn-cart {
+  background-color: #fc4a1a;
+  border: 1px solid #922709;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.btn-cart:hover {
+  background-color: #922709;
+}
+
+.marginRight {
+  margin-right: 0.4rem;
+}
+
+.btn-remove {
+  border-radius: 50%;
+}

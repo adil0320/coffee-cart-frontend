@@ -1,0 +1,20 @@
+.title {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.order-item {
+  margin-bottom: 1.5rem;
+}
+
+.orders ul {
+  list-style: none;
+}
+li {
+  padding: 1rem;
+}
+
+.amount {
+  font-size: 1.5rem;
+  font-weight: bold;
+}

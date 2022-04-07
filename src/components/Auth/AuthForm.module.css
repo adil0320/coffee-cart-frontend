@@ -1,0 +1,48 @@
+.title {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.form {
+  padding: 3rem;
+  margin-left: 7rem;
+}
+
+.control {
+  margin-bottom: 1rem;
+}
+
+.control label {
+  font-size: 1.25rem;
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.control input {
+  width: 60%;
+  padding: 0.3rem;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin-top: 0.5rem;
+}
+
+.actions {
+  margin-top: 2rem;
+}
+
+.actions button {
+  margin-right: 1rem;
+  background-color: #fc4a1a;
+  border: 1px solid #fc4a1a;
+  color: white;
+  padding: 0.3rem 1.5rem;
+  font-size: 1.25rem;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #b92b03;
+  cursor: not-allowed;
+}

@@ -1,0 +1,40 @@
+.form {
+  text-align: right;
+}
+
+.input {
+  margin: 0.5rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.input label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.input input {
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+}
+
+.form button {
+  font-size: 1.25rem;
+  cursor: pointer;
+  background-color: #fc4a1a;
+  border: 1px solid #fc4a1a;
+  color: white;
+  padding: 0.3rem 2rem;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.form button:hover,
+.form button:active {
+  background-color: #b92b03;
+  border-color: #b92b03;
+}
