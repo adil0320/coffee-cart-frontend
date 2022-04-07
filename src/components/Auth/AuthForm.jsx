@@ -46,11 +46,9 @@ const AuthForm = () => {
       setIsLoading(true);
       let url;
       if (isLogin) {
-        url =
-          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCUyVPmsToqJAdMEhn-VpGQK-DVKujAP5Q";
+        url = process.env.REACT_APP_API_ENDPOINT + "/users/login";
       } else {
-        url =
-          "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCUyVPmsToqJAdMEhn-VpGQK-DVKujAP5Q";
+        url = process.env.REACT_APP_API_ENDPOINT + "/users/";
       }
 
       const response = await fetch(url, {
@@ -65,14 +63,15 @@ const AuthForm = () => {
         },
       });
       setIsLoading(false);
-      if (!response.ok) {
-        setAuthError("Authentication Failed");
-        throw new Error("Authentication Failed");
-      }
       const responseData = await response.json();
-      authCtx.login(responseData.idToken, responseData.email);
-      localStorage.setItem("email", responseData.email);
-      localStorage.setItem("token", responseData.idToken);
+      if (!response.ok) {
+        setAuthError(responseData.error);
+        throw new Error(responseData.error);
+      }
+      authCtx.login(responseData.token, responseData.user.email);
+      localStorage.setItem("userId", responseData.user.id);
+      localStorage.setItem("email", responseData.user.email);
+      localStorage.setItem("token", responseData.token);
       history.replace("/menu");
     } catch (err) {
       console.log(err);
