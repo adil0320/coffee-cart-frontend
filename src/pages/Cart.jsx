@@ -13,12 +13,13 @@ const CartPage = () => {
   const history = useHistory();
   const hasCartItems = cartCtx.items.length > 0;
 
-  console.log(cartCtx.items);
-  console.log(new Date().toLocaleString());
+  // console.log(cartCtx.items);
+  // console.log(new Date().toLocaleString());
 
   const orderSubmitHandler = async () => {
     setIsLoading(true);
-    await fetch("https://adils-cafe-default-rtdb.firebaseio.com/orders.json", {
+    const url = process.env.REACT_APP_API_ENDPOINT + "/orders";
+    await fetch(url, {
       method: "POST",
       body: JSON.stringify({
         email: authCtx.email,
@@ -28,6 +29,7 @@ const CartPage = () => {
       }),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${authCtx.token}`,
       },
     });
     setIsLoading(false);

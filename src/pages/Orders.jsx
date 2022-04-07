@@ -15,24 +15,31 @@ const OrdersPage = () => {
   useEffect(() => {
     setIsLoading(true);
     const getOrders = async () => {
-      const orders = await fetch(
-        `https://adils-cafe-default-rtdb.firebaseio.com/orders.json?orderBy="email"&equalTo="${authCtx.email}"`
-      );
+      const url = process.env.REACT_APP_API_ENDPOINT + "/orders";
+      const orders = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${authCtx.token}`,
+        },
+      });
       const ordersData = await orders.json();
+      if (!orders.ok) {
+        setOrders([]);
+        setIsLoading(false);
+        return;
+      }
       setIsLoading(false);
 
-      const loadedOrders = [];
-
-      for (const key in ordersData) {
-        loadedOrders.push({ id: key, ...ordersData[key] });
-      }
-
-      setOrders(loadedOrders);
+      setOrders(ordersData);
     };
-    getOrders();
-  }, [authCtx.email]);
+    try {
+      getOrders();
+    } catch (error) {
+      console.log("first");
+      setOrders([]);
+    }
+  }, [authCtx.email, authCtx.token]);
 
-  if (orders.length === 0 && !isLoading) {
+  if (!orders || (orders.length === 0 && !isLoading)) {
     return <h2 style={{ textAlign: "center" }}>No Orders Yet</h2>;
   }
 
@@ -43,14 +50,14 @@ const OrdersPage = () => {
       <div className={classes.orders}>
         <ul>
           {orders.map((order) => (
-            <div className={classes["order-item"]}>
+            <div className={classes["order-item"]} key={order._id}>
               <Card>
-                <li key={order.id}>
+                <li>
                   <div className={classes.amount}>
                     Total Amount: ${order.totalAmount}
                   </div>
                   <div style={{ marginTop: "1rem" }}>
-                    Order Date: {order.orderDate}
+                    Order Date: {new Date(order.orderDate).toLocaleString()}
                   </div>
                   <div>
                     {order.items.map((item) => (
